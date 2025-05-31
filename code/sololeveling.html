@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fiche de personnage Odin504 - Solo Leveling</title>
+<link rel="stylesheet" href="sololeveling.css" />
+</head>
+<body>
+  <h1>Fiche de personnage Solo Leveling</h1>
+  <h2>Odin504</h2>
+
+  <section>
+    <h3>Statistiques de base</h3>
+    <div class="stat-row">
+      <label for="force">Force :</label>
+      <input type="number" id="force" min="0" max="100" value="5" />
+    </div>
+    <div class="stat-row">
+      <label for="endurance">Endurance :</label>
+      <input type="number" id="endurance" min="0" max="100" value="5" />
+    </div>
+    <div class="stat-row">
+      <label for="constitution">Constitution :</label>
+      <input type="number" id="constitution" min="0" max="100" value="5" />
+    </div>
+    <div class="stat-row">
+      <label for="dext_abdo">Dextérité abdominale :</label>
+      <input type="number" id="dext_abdo" min="0" max="100" value="5" />
+    </div>
+    <div class="stat-row">
+      <label for="volonte">Volonté :</label>
+      <input type="number" id="volonte" min="0" max="100" value="6" />
+    </div>
+  </section>
+  <section>
+    <h3>Checklist des quêtes à cocher</h3>
+    <div class="checkbox-group">
+      <label><input type="checkbox" id="q1" /> Quête quotidienne : Éveil du Titan du Haut (2 rounds)</label>
+      <label><input type="checkbox" id="q2" /> Quête spéciale : Cœur d’Acier (3 rounds)</label>
+      <label><input type="checkbox" id="q3" /> Raid hebdomadaire : Raid du Cœur du Dragon (2 à 3 rounds)</label>
+    </div>
+  </section>
+
+  <button id="saveBtn">Sauvegarder dans le navigateur</button>
+
+  <script>
+    const saveBtn = document.getElementById('saveBtn');
+
+    function saveData() {
+      const data = {
+        force: document.getElementById('force').value,
+        endurance: document.getElementById('endurance').value,
+        constitution: document.getElementById('constitution').value,
+        dext_abdo: document.getElementById('dext_abdo').value,
+        volonte: document.getElementById('volonte').value,
+        niveau: document.getElementById('niveau').value,
+        xp: document.getElementById('xp').value,
+        q1: document.getElementById('q1').checked,
+        q2: document.getElementById('q2').checked,
+        q3: document.getElementById('q3').checked
+      };
+      localStorage.setItem('soloLevelingOdin504', JSON.stringify(data));
+      alert('Données sauvegardées !');
+    }
+
+    saveBtn.addEventListener('click', saveData);
+
+    window.onload = function() {
+      const saved = localStorage.getItem('soloLevelingOdin504');
+      if (saved) {
+        const data = JSON.parse(saved);
+        document.getElementById('force').value = data.force;
+        document.getElementById('endurance').value = data.endurance;
+        document.getElementById('constitution').value = data.constitution;
+        document.getElementById('dext_abdo').value = data.dext_abdo;
+        document.getElementById('volonte').value = data.volonte;
+        document.getElementById('niveau').value = data.niveau;
+        document.getElementById('xp').value = data.xp;
+        document.getElementById('q1').checked = data.q1;
+        document.getElementById('q2').checked = data.q2;
+        document.getElementById('q3').checked = data.q3;
+      }
+    };
+  </script>
+
+  <h1>Quêtes Solo Leveling - Odin504</h1>
+
+  <div class="button-container">
+    <button data-quest="quest1">Quête quotidienne : Éveil du Titan du Haut</button>
+    <button data-quest="quest2">Quête spéciale : Cœur d’Acier</button>
+    <button data-quest="quest3">Raid hebdomadaire : Raid du Cœur du Dragon</button>
+  </div>
+
+  <section id="quest-display" class="quest-box">
+    <h2>Choisis une quête</h2>
+    <p>Sélectionne une quête pour voir ses détails.</p>
+  </section>
+
+  <section class="rank-section">
+    <h2>Rang actuel</h2>
+    <p id="current-rank">Novice Éveillé (Niveau 1) - XP : 0
+    </p>
+    <button id="addXpBtn">Ajouter 20 XP</button>
+  </section>
+
+<script>
+  const quests = {
+    quest1: {
+      title: "Quête quotidienne : Éveil du Titan du Haut",
+      description: `
+        <ul>
+          <li>10 pompes classiques (ou sur genoux)</li>
+          <li>10 dips (sur chaise ou lit)</li>
+          <li>20 sec planche haute bras tendus</li>
+          <li>10 crunchs</li>
+          <li>10 levées de jambes (abdos bas)</li>
+        </ul>
+        <p><strong>Repos :</strong> 30 sec, faire 2 rounds</p>
+        <p><strong>Récompense :</strong> +20 XP, +1 Force, +1 Endurance</p>
+      `
+    },
+    quest2: {
+      title: "Quête spéciale : Cœur d’Acier",
+      description: `
+        <ul>
+          <li>20 crunchs</li>
+          <li>15 levées de jambes</li>
+          <li>20 Russian twists</li>
+          <li>30 sec hollow hold</li>
+          <li>10 touchers de genoux</li>
+          <li>15 sec planche</li>
+        </ul>
+        <p><strong>Repos :</strong> 1 min, faire 3 rounds</p>
+        <p><strong>Récompense :</strong> +30 XP, +1 Dextérité abdominale, +1 Volonté</p>
+      `
+    },
+    quest3: {
+      title: "Raid hebdomadaire : Raid du Cœur du Dragon",
+      description: `
+        <ul>
+          <li>10 pompes écartées</li>
+          <li>10 pompes triceps</li>
+          <li>20 crunchs</li>
+          <li>15 levées de jambes</li>
+          <li>20 sec hollow hold</li>
+          <li>30 sec planche avec tapotements d’épaules</li>
+          <li>20 Russian twists</li>
+        </ul>
+        <p><strong>Repos :</strong> 1 min, faire 2 à 3 rounds</p>
+        <p><strong>Récompense :</strong> +50 XP, +1 Constitution, +1 Résistance, débloque Rang D après 3 réussites</p>
+      `
+    }
+  };
+
+  const ranks = [
+    { lvl: 1, xpNeeded: 0, title: "Novice Éveillé" },
+    { lvl: 2, xpNeeded: 50, title: "Apprenti Chasseur" },
+    { lvl: 3, xpNeeded: 120, title: "Chasseur de Rang E" },
+    { lvl: 4, xpNeeded: 250, title: "Chasseur de Rang D" },
+    { lvl: 5, xpNeeded: 400, title: "Éveillé Musculaire" },
+    { lvl: 6, xpNeeded: 600, title: "Bourreau des Abdos" }
+  ];
+
+  let currentXp = 0;
+  let currentLevel = 1;
+
+  const buttons = document.querySelectorAll('button[data-quest]');
+  const questDisplay = document.getElementById('quest-display');
+  const currentRankDisplay = document.getElementById('current-rank');
+  const addXpBtn = document.getElementById('addXpBtn');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const questKey = button.getAttribute('data-quest');
+      const quest = quests[questKey];
+      questDisplay.innerHTML = `<h2>${quest.title}</h2>${quest.description}`;
+    });
+  });
+
+  function updateRank() {
+    // Trouver le rang correspondant au XP actuel
+    let rank = ranks[0];
+    for (let i = ranks.length - 1; i >= 0; i--) {
+      if (currentXp >= ranks[i].xpNeeded) {
+        rank = ranks[i];
+        currentLevel = rank.lvl;
+        break;
+      }
+    }
+    currentRankDisplay.textContent = `${rank.title} (Niveau ${rank.lvl}) - XP : ${currentXp}`;
+  }
+
+  addXpBtn.addEventListener('click', () => {
+    // Ajoute 20 XP à chaque clic (à ajuster selon la quête)
+    currentXp += 20;
+    updateRank();
+  });
+
+  // Initial update
+  updateRank();
+
+</script>
+
+</body>
+</html>

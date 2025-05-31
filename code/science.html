@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LibreOffice Style</title>
+  <link rel="stylesheet" href="CSS.css">
+</head>
+<body>
+  <!-- BARRE D'OUTILS STYLE LIBREOFFICE -->
+  <div class="toolbar">
+    <nav class="menu-bar">
+      <ul>
+        <li>Fichier</li>
+        <li>Édition</li>
+        <li>Affichage</li>
+        <li>Insertion</li>
+        <li>Formt</li>
+        <li>Styles</li>
+        <li>Tableau</li>
+        <li>Outils</li>
+        <li>Aide</li>
+      </ul>
+    </nav>
+    <button title="Accueil" onclick="location.href='index.html'">🏠</button>
+    <div class="icon-bar">
+      <button title="Nouveau">🆕</button>
+      <button title="Ouvrir">📂</button>
+      <button title="Enregistrer">💾</button>
+      <span class="separator"></span>
+      <button title="Couper">✂️</button>
+      <button title="Copier">📋</button>
+      <button title="Coller">📥</button>
+      <span class="separator"></span>
+      <button title="Gras"><strong>B</strong></button>
+      <button title="Italique"><em>I</em></button>
+      <button title="Souligné"><u>U</u></button>
+    </div>
+  </div>
+
+  <!-- ZONE DE RÉDACTION -->
+  <main>
+    <div id="page" contenteditable="true">
+      <p>Hello World</p>
+    </div>
+  </main>
+  <script>
+    const page = document.getElementById('page');
+  
+    // Fonction Enregistrer
+    document.querySelector('button[title="Enregistrer"]').addEventListener('click', () => {
+      localStorage.setItem('svt_fiche', page.innerHTML);
+      alert("Contenu enregistré !");
+    });
+  
+    // Charger contenu au démarrage
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('svt_fiche');
+      if (saved) {
+        page.innerHTML = saved;
+      }
+    });
+  
+    // Fonctions de mise en forme (B, I, U)
+    document.querySelector('button[title="Gras"]').addEventListener('click', () => {
+      document.execCommand('bold');
+    });
+  
+    document.querySelector('button[title="Italique"]').addEventListener('click', () => {
+      document.execCommand('italic');
+    });
+  
+    document.querySelector('button[title="Souligné"]').addEventListener('click', () => {
+      document.execCommand('underline');
+    });
+  </script>
+  
+</body>
+</html>
+

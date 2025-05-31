@@ -1,0 +1,17 @@
+h1{
+    text-align: center;
+    
+}
+.conteneur{
+    background-color:#8BA503 ;
+    border-radius: 10px;
+    border-color: black; 
+    border-style:groove; 
+    border-width: 1px;
+    margin: 10px;
+selecteur{
+    color: black;
+    background-color: yellow;
+    border-color: black;
+}
+}
